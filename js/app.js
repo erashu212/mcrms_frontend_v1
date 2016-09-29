@@ -17,9 +17,17 @@
             templateUrl: '/templates/speaker_view.html',
             controller: 'speakerViewController'
           })
-          .when('/search', {
+          .when('/admin/search', {
             templateUrl: '/templates/search.html',
             controller: 'searchController'
+          })
+          .when('/admin/createSpeaker',{
+            templateUrl: '/templates/admin_edit_speaker.html',
+            controller: 'createSpeakerController'
+          })
+          .when('/admin/editSpeaker/:speakerUUID',{
+            templateUrl: '/templates/admin_edit_speaker.html',
+            controller: 'editSpeakerController'
           })
           .when('/', {
             templateUrl: '/templates/main.html',
@@ -109,7 +117,7 @@
       };
 
       $http.get('/api/v1/admin/myself').then(function (response) {
-        $location.path('/search');
+        $location.path('/admin/search');
       }, function (errorResponse) {
         //it is ok, unauthorized
       });

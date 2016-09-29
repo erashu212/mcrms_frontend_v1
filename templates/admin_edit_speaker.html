@@ -1,1 +1,222 @@
-<h1>Edit speaker</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="margin-20">
+                <h1>Speaker Landing Page</h1>
+            </div>
+
+            <form [formGroup]="myForm" autocomplete="off" novalidate>
+
+                <div>
+                    <!--<div>DUE DATE <span style="color:blue">00/00/00</span></div>-->
+                    <!--<div>-->
+                    <div class="margin-20"><strong>INFO GROUP 1 </strong>DUE DATE {{infoGroup1DueDate}}</div>
+                    <!--</div>-->
+                </div>
+                <label class="form-check-inline">
+                    <input type="checkbox">POST-Conference
+                </label>
+                <label class="form-check-inline">
+                    <input type="checkbox">Individual Presentation
+                </label>
+                <label class="form-check-inline">
+                    <input type="checkbox">Lead Panel Discussion
+                </label>
+                <label class="form-check-inline">
+                    <input type="checkbox">Panel Discussion Moderator
+                </label>
+
+                <div class="form-group">
+                    <label for="firstname">First Name</label>
+                    <input class="form-control" type="text" id="firstname" placeholder="First Name" maxlength="50" formControlName="firstname">
+                    <!--<input class="form-control" type="text" id="firstname" placeholder="First Name" formControlName="firstname" [ngModel]="client.firstname">-->
+                    <!--<input class="form-control" type="text" id="firstname" placeholder="First Name" formControlName="firstname" [ngModel]="speakers?.firstname">-->
+                    <!--<input class="form-control" type="text" id="firstname" placeholder="Firstname" formControlName="firstname" #firstname="ngModel">-->
+                    <div class="field-error-message" *ngIf="myForm.controls.firstname.dirty && myForm.controls.firstname.errors?.required">
+                        <!--<div class="field-error-message" *ngIf="firstname?.errors?.required">-->
+                        field is mandatory
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="lastname">Last Name</label>
+                    <input class="form-control" type="text" id="lastname" placeholder="Last Name" maxlength="50" formControlName="lastname">
+                </div>
+                <div class="form-group">
+                    <label for="credentials">Credentials</label>
+                    <input class="form-control" type="text" id="credentials" placeholder="Credentials" maxlength="10" formControlName="credentials">
+                </div>
+                <!--<div class="form-group">
+                  <label for="name">name</label>
+                  <input class="form-control" type="text" id="name" placeholder="name" formControlName="name">
+                </div>-->
+
+
+                <fieldset formGroupName="address">
+                    <label for="street1">Street Address1</label>
+                    <input class="form-control" type="text" id="street1" placeholder="Street Address1" maxlength="100" formControlName="street1">
+                    <label for="street2">Street Address2</label>
+                    <input class="form-control" type="text" id="street2" placeholder="Street Address2" maxlength="100" formControlName="street2">
+
+                    <label for="City">City</label>
+                    <input class="form-control" type="text" id="city" placeholder="City" maxlength="50" formControlName="city">
+
+                    <label for="zipcode">Zip Code</label>
+                    <input class="form-control" type="text" id="zipcode" placeholder="Zip Code" maxlength="10" formControlName="zipcode">
+                </fieldset>
+
+                <br>
+
+                <!--lectures-->
+                <div formArrayName="lectures">
+                    <div *ngFor="let lectures of lectures.controls; let i=index" class="panel panel-default">
+                        <div class="panel-heading">
+                            <span>Lecture {{i + 1}}</span>
+                            <!--<span class="glyphicon glyphicon-remove pull-right" *ngIf="lectures.controls.length > 1" (click)="removeLecture(i)"></span>-->
+                            <span class="glyphicon glyphicon-remove pull-right" (click)="removeLecture(i)"></span>
+                        </div>
+                        <div class="panel-body" [formGroupName]="i">
+                            <!--<lecture [group]="myForm.controls.lectures.controls[i]"></lecture>-->
+                            <div><strong>INFO GROUP 1 </strong>DUE DATE {{infoGroup1DueDate}}</div>
+                            <input class="form-control" type="text" id="title" placeholder="Title" maxlength="100" formControlName="title">
+                            <input class="form-control" type="text" id="description" placeholder="Description" formControlName="description">
+                            <div><strong>INFO GROUP 2 </strong>DUE DATE {{infoGroup2DueDate}}</div>
+                            <input class="form-control" type="text" id="objective" placeholder="Objective" formControlName="objective">
+                            <!--<input class="form-control" type="text" id="outline" placeholder="Outline" formControlName="outline">-->
+                            <textarea class="form-control custom-control" rows="3" style="resize:none" placeholder="Outline" formControlName="outline"></textarea>
+                            <!--<button class="btn btn-default" (click)="removeLecture(i)">Remove</button>-->
+                        </div>
+
+                        <!--<div *ngFor="let address of addresses.controls; let i=index" [formGroupName]="i">
+                            <p>Address</p>
+                            <md-input placeholder="Street" formControlName="street" required></mid-input>
+                            <div class="flex align-center">
+                                <select formControlName="state" class="flex-one">
+                                    <option value="" disabled>Select a state</option>
+                                    <option value="CA">CA</option>
+                                    <option value="NY">NY</option>
+                                </select>
+                                <md-input placeholder="zip" type="number" formControlName="zip" class="flex-one"></md-input>
+                            </div>
+                        </div>-->
+
+                    </div>
+                </div>
+
+                <div class="margin-20">
+                    <a (click)="addLecture()" style="cursor: default">
+                        Add another lecture +
+                    </a>
+                </div>
+                <!--end lectures-->
+                <div>
+                    <div>
+                        <label>
+                            <input type="checkbox" name="isActive" formControlName="isActive">
+                            Is Active
+                        </label>
+                    </div>
+                    <label></label>
+                    <!--<label id="testlabel" name="testlabel" formControlName="testlabel"></label>-->
+                    <br>
+
+                    <label>Gender</label>
+                    <div *ngFor="let gender of genders">
+                        <label>
+                            <input type="radio" name="gender" formControlName="gender"
+                                   [value]="gender.value">
+                            {{gender.display}}
+                        </label>
+                    </div>
+                </div>
+
+
+                <div>
+                    ADDITIONAL INFORMATION REQUIRED:<br>
+                    <div class="tabbedIn">Complete CV - Accomplishments - Resume</div>
+                    <div class="tabbedIn">Short Bio-Sketch</div>
+                    <div class="tabbedIn">Head / Shoulders Photo</div>
+                    <div class="tabbedIn">50 word or less introduction if you are a speaker</div>
+                </div>
+
+                <div class="margin-20"><strong>INFO GROUP 3 </strong>DUE DATE {{infoGroup3DueDate}}</div>
+                <div class="tabbedIn">Powerpoint Upload</div>
+                <div class="tabbedIn">Audio/Visual items needed (check all that apply):</div>
+
+                <div class="tabbedInx2">
+                    <label class="form-check-inline">
+                        <input type="checkbox">Laser pointer
+                    </label>
+                    <label class="form-check-inline">
+                        <input type="checkbox">Computer
+                    </label>
+                    <label class="form-check-inline">
+                        <input type="checkbox">Apple
+                    </label>
+                    <label class="form-check-inline">
+                        <input type="checkbox">PC
+                    </label>
+                    <span> Or </span>
+                    <label class="form-check-inline">
+                        <input type="checkbox">Use own computer
+                    </label>
+                    <label class="form-check-inline">
+                        <input type="checkbox">Apple
+                    </label>
+                    <label class="form-check-inline">
+                        <input type="checkbox">PC
+                    </label>
+                </div>
+
+                <div class="tabbedIn">Note: For Questions, Please Contact Dara Long, Special Projects Coordinator at dara@breastcare.org</div>
+
+                <button class="btn btn-primary margin-20" [disabled]="!myForm.valid" (click)="save()">Submit</button>
+
+
+
+
+
+                <!--Diagnostic Info-->
+                <div class="clearfix"></div>
+                <div style="margin-top: 50px">
+                    <hr>
+                    <p>Karl's diagnostic information:</p>
+                    <div>
+                        <button (click)="partialLoad()">Partial Load</button>
+                        <button (click)="save()">Save</button>
+                        <button (click)="reset()">Cancel</button>
+                    </div>
+
+                    <div class="margin-20">
+                        <!--<div>{{ myForm.controls.firstname?.errors | json }}</div>
+                        <div>{{ myForm.controls.firstname?.errors?.required | json }}</div>-->
+
+                        <div>
+                            <pre>lectures.controls.length: <br>{{lectures.controls.length | json}}</pre>
+                        </div>
+                        <div>
+                            <pre>myForm.controls.firstname.value: <br>{{myForm.controls.firstname.value | json}}</pre>
+                        </div>
+                        <div>
+                            <pre>myForm.status: <br>{{myForm.status | json}}</pre>
+                        </div>
+                        <div>
+                            <pre>myForm.value: <br>{{myForm.value | json}}</pre>
+                        </div>
+                        <div>
+                            <pre>myForm.valid: <br>{{myForm.valid | json}}</pre>
+                        </div>
+                        <div>
+                            <pre>people: <br>{{people | json}}</pre>
+                        </div>
+                        <div>
+                            <pre>speakers: <br>{{speakers | json }}</pre>
+                        </div>
+                    </div>
+                </div>
+                <!--end Diagnostic section-->
+
+            </form>
+
+        </div>
+    </div>
+</div>

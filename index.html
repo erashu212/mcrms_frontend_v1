@@ -28,7 +28,8 @@
 
                 <li ng-if="!isAdmin"><a href="/#/admin/login">Admin login</a></li>
                 <li ng-if="isAdmin"><a href="/#/">!ADMIN! {{myAdminUsername}}</a></li>
-                <li ng-if="isAdmin"><a href="/#/search">List speakers</a></li>
+                <li ng-if="isAdmin"><a href="/#/admin/createSpeaker">Create speaker</a></li>
+                <li ng-if="isAdmin"><a href="/#/admin/search">List speakers</a></li>
                 <li ng-if="isAdmin"><a href="/#/" ng-click="adminLogout()">Admin logout</a></li>
 
             </ul>
