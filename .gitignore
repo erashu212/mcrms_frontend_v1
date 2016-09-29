@@ -8,3 +8,8 @@
 # Distribution folders
 node_modules/
 bower_components/
+
+
+# Minified code
+assets/
+
