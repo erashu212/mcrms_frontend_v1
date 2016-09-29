@@ -1,0 +1,14 @@
+{
+  "name": "mcrms.local",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "install":"bower install"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bower": "^1.7.9"
+  }
+}
