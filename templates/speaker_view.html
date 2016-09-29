@@ -1,6 +1,8 @@
 <div ng-if="speakerFound">
     <h1>Speaker</h1>
     <p>Permanent link <a href="/#/speaker/{{speaker.UUID}}">/#/speaker/{{speaker.UUID}}</a></p>
+    <pre>{{speakerJSON}}</pre>
+
 </div>
 <div ng-if="!speakerFound">
     <h1>Unable to find the speaker</h1>

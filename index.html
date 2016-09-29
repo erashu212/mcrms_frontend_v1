@@ -12,15 +12,23 @@
     <META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
 </head>
 <body>
-<div class="jumbotron">
+<div class="jumbotron" ng-controller="headerController">
     <h1>MCRMS</h1>
     <h2>title</h2>
     <nav class="navbar navbar-inverse" role="navigation">
         <div class="container-fluid">
             <ul class="nav navbar-nav">
                 <li><a class="navbar-brand" href="/#/">Main</a></li>
-                <li><a href="/#/speaker/login">Speaker login</a></li>
-                <li><a href="/#/admin/login">Admin login</a></li>
+                <li ng-if="!isUserLogged"><a href="/#/speaker/login">Speaker login</a></li>
+                <li ng-if="isUserLogged"><a href="/#/speaker/{{myUUID}}">{{myFirstName}} {{myLastName}}</a></li>
+                <li ng-if="isUserLogged"><a href="/#/" ng-click="speakerLogout()">Logout</a></li>
+
+
+                <li ng-if="!isAdmin"><a href="/#/admin/login">Admin login</a></li>
+                <li ng-if="isAdmin"><a href="/#/">!ADMIN! {{myAdminUsername}}</a></li>
+                <li ng-if="isAdmin"><a href="/#/search">List speakers</a></li>
+                <li ng-if="isAdmin"><a href="/#/" ng-click="adminLogout()">Admin logout</a></li>
+
             </ul>
         </div>
     </nav>
