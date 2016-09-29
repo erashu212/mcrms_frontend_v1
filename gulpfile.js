@@ -17,7 +17,7 @@ var
   fontFilter = gulpFilter(['*.eot', '*.woff', '*.svg', '*.ttf']);
 
 gulp.task('clean', function (cb) {
-  return del(['assets/*.min.js', 'assets/*.min.css'], cb);
+  return del(['assets/*.min.js', 'assets/*.min.css','assets/*.html'], cb);
 });
 
 gulp.task('bower', function () {
@@ -57,13 +57,20 @@ gulp.task('css', function () {
 
 gulp.task('copy', function () {
   return gulp.src([
-      'index.html',
-      'favicon.ico',
-      'logo.png'
-    ])
+    'index.html',
+    'favicon.ico',
+    'logo.png'
+  ])
     .pipe(gulp.dest('assets'));
-})
+});
 
 gulp.task('default', ['clean', 'bower'], function () {
-  return gulp.start('js', 'css');
+  return gulp.start('js', 'css', 'copy');
+});
+
+gulp.task('deploy_lab_2', ['default'], function () {
+  return gulp.src([
+    'assets/*'
+  ])
+    .pipe(gulp.dest('/var/www/html/mcrms'));
 });
