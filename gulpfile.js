@@ -27,7 +27,8 @@ gulp.task('clean', function (cb) {
     'assets/*.min.js',
     'assets/*.min.css',
     'assets/*.html',
-    'assets/templates/*.html'
+    'assets/templates/*.html',
+    'assets/fonts/*'
   ], cb);
 });
 
@@ -71,10 +72,17 @@ gulp.task('templates', function () {
     'templates/*.html'
   ])
     .pipe(gulp.dest('assets/templates'));
-
 });
 
-gulp.task('copy', ['templates'], function () {
+gulp.task('fonts', function () {
+  return gulp.src([
+    'fonts/glyphicons-halflings-regular.*'
+  ])
+    .pipe(gulp.dest('assets/fonts'));
+});
+
+
+gulp.task('copy', ['templates','fonts'], function () {
   return gulp.src([
     'favicon.ico',
     'logo.png'
