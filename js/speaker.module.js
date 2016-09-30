@@ -9,6 +9,10 @@
             templateUrl: '/templates/speaker_login.html',
             controller: 'speakerLoginController'
           })
+          .when('/speaker/editMyself',{
+            templateUrl: '/templates/admin_edit_speaker.html',
+            controller: 'editMyselfSpeakerController'
+          })
           .when('/speaker/:speakerUUID', {
             templateUrl: '/templates/speaker_view.html',
             controller: 'speakerViewController'
@@ -36,8 +40,8 @@
 
       $http.get('/api/v1/auth/myself').then(function (response) {
         var uuid = response.data.data.UUID;
-        console.log(response.data.data);
-        console.log(response.data.data.UUID);
+        // console.log(response.data.data);
+        // console.log(response.data.data.UUID);
         $location.path('/speaker/' + uuid);
       }, function (errorResponse) {
         //it is ok, unauthorized
@@ -52,5 +56,32 @@
       }, function (errorResponse) {
         $scope.speakerFound = false;
       });
+    }])
+    .controller('editMyselfSpeakerController', ['$scope', '$http', '$location', '$route', function ($scope, $http, $location, $route) {
+      var speakerUUID;
+
+      $http.get('/api/v1/auth/myself').then(function (response) {
+        speakerUUID = response.data.data.UUID;
+        $scope.speaker = response.data.data;
+        //it is ok, authorized
+      }, function (errorResponse) {
+        $location.path('/speaker/login');
+      });
+
+      $scope.addLecture = function () {
+        $scope.speaker.lectures.push({});
+      };
+
+      $scope.removeLecture = function (i) {
+        console.log('Removing lecture ', i);
+        $scope.speaker.lectures.splice(i, 1);
+      };
+
+      $scope.save = function () {
+        return $http.put('/api/v1/speaker/'+speakerUUID, $scope.speaker)
+          .then(function (ok) {
+            alert('Data saved!');
+          });
+      };
     }]);
 })();

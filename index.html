@@ -23,6 +23,7 @@
                 <li><a class="navbar-brand" href="/#/">Main</a></li>
                 <li ng-if="!isUserLogged"><a href="/#/speaker/login">Speaker login</a></li>
                 <li ng-if="isUserLogged"><a href="/#/speaker/{{myUUID}}">{{myFirstName}} {{myLastName}}</a></li>
+                <li ng-if="isUserLogged"><a href="/#/speaker/editMyself">Edit my profile</a></li>
                 <li ng-if="isUserLogged"><a href="/#/" ng-click="speakerLogout()">Logout</a></li>
 
 

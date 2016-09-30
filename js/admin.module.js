@@ -71,5 +71,35 @@
         }
       });
     }])
+    .controller('createSpeakerController', ['$scope', '$http', '$location', '$route', function ($scope, $http, $location, $route) {
 
+    }])
+    .controller('editSpeakerController', ['$scope', '$http', '$location', '$route', '$routeParams', function ($scope, $http, $location, $route, $routeParams) {
+      var speakerUUID = $routeParams.speakerUUID;
+      $http.get('/api/v1/admin/myself').then(function (response) {
+        //it is ok, authorized
+      }, function (errorResponse) {
+        $location.path('/admin/login');
+      }).then(function () {
+        return $http.get('/api/v1/speaker/' + speakerUUID);
+      }).then(function (response) {
+        $scope.speaker = response.data.data;
+      });
+
+      $scope.addLecture = function () {
+        $scope.speaker.lectures.push({});
+      };
+
+      $scope.removeLecture = function (i) {
+        console.log('Removing lecture ', i);
+        $scope.speaker.lectures.splice(i, 1);
+      };
+
+      $scope.save = function () {
+        return $http.put('/api/v1/speaker/'+speakerUUID, $scope.speaker)
+          .then(function (ok) {
+            alert('Data saved!');
+          });
+      };
+    }])
 })();

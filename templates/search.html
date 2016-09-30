@@ -13,6 +13,7 @@
                     <th>EMail</th>
                     <th>Firstname</th>
                     <th>Lastname</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -20,10 +21,13 @@
                     <td><a href="/#/speaker/{{speaker.UUID}}">/#/speaker/{{speaker.UUID}}</a></td>
                     <td>
                         <a href="mailto:{{speaker.email}}">{{speaker.email}}</a>
-                        <button class="btn btn-danger" ng-click="resetPassword(speaker)">Reset password</button>
                     </td>
                     <td>{{speaker.firstname}}</td>
                     <td>{{speaker.lastname}}</td>
+                    <td>
+                        <a href="#/admin/editSpeaker/{{speaker.UUID}}" class="btn btn-success">Edit</a>
+                        <button class="btn btn-danger" ng-click="resetPassword(speaker)">Reset password</button>
+                    </td>
                 </tr>
                 </tbody>
             </table>
