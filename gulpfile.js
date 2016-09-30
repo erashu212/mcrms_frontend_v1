@@ -39,11 +39,12 @@ gulp.task('bower', function () {
 gulp.task('js', function () {
   return gulp.src([
     'bower_components/jquery/jquery.js',
-    'bower_components/jquery/dist/jquery.min.js',
-    'bower_components/bootstrap/dist/js/bootstrap.min.js',
-    'bower_components/angular/angular.min.js',
-    'bower_components/angular-route/angular-route.min.js',
-    'js/app.js'
+    'bower_components/jquery/dist/jquery.js',
+    'bower_components/bootstrap/dist/js/bootstrap.js',
+    'bower_components/angular/angular.js',
+    'bower_components/angular-route/angular-route.js',
+    'js/app.js',
+    'js/*.module.js'
   ])
     .pipe(debug({title: 'Processing js files:'}))
     .pipe(concat('mcrms.js'))
