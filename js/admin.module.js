@@ -15,7 +15,7 @@
             templateUrl: '/templates/search.html',
             controller: 'searchController'
           })
-//Page to create new speaker
+//Page, where Admin can create new speaker
           .when('/admin/createSpeaker', {
             templateUrl: '/templates/admin_edit_speaker.html',
             controller: 'createSpeakerController'
@@ -76,7 +76,27 @@
       });
     }])
     .controller('createSpeakerController', ['$scope', '$http', '$location', '$route', function ($scope, $http, $location, $route) {
+      $http.get('/api/v1/admin/myself').then(function (response) {
+        //it is ok, authorized
+      }, function (errorResponse) {
+        $location.path('/admin/login');
+      });
 
+      $scope.addLecture = function () {
+        $scope.speaker.lectures.push({});
+      };
+
+      $scope.removeLecture = function (i) {
+        console.log('Removing lecture ', i);
+        $scope.speaker.lectures.splice(i, 1);
+      };
+
+      $scope.save = function () {
+        return $http.post('/api/v1/speaker/', $scope.speaker)
+          .then(function (ok) {
+            $location.path('/admin/search');
+          });
+      };
     }])
     .controller('editSpeakerController', ['$scope', '$http', '$location', '$route', '$routeParams', function ($scope, $http, $location, $route, $routeParams) {
       var speakerUUID = $routeParams.speakerUUID;
