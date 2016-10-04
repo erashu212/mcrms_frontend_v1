@@ -17,6 +17,8 @@
             redirectTo: '/'
           });
       }])
+//Header controller for menu - glitchy
+//but golang api endpoints works ok
     .controller('headerController', ['$scope', '$http', '$route', function ($scope, $http, $route) {
       $http.get('/api/v1/auth/myself').then(function (response) {
         $scope.myUUID = response.data.data.UUID;
@@ -50,8 +52,6 @@
             $route.reload();
           });
       };
-
-
     }])
     .controller('mainController', ['$scope', function ($scope) {
       $scope.controller = 'mainController';

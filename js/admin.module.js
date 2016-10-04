@@ -5,18 +5,22 @@
     .config(['$routeProvider',
       function ($routeProvider) {
         $routeProvider
+//Page where Admin, not Speaker, can login
           .when('/admin/login', {
             templateUrl: '/templates/admin_login.html',
             controller: 'adminLoginController'
           })
+//Page, where Admin, can see list of Speakers
           .when('/admin/search', {
             templateUrl: '/templates/search.html',
             controller: 'searchController'
           })
+//Page to create new speaker
           .when('/admin/createSpeaker', {
             templateUrl: '/templates/admin_edit_speaker.html',
             controller: 'createSpeakerController'
           })
+//Page to edit speaker - Admin can visit this page from /admin/search
           .when('/admin/editSpeaker/:speakerUUID', {
             templateUrl: '/templates/admin_edit_speaker.html',
             controller: 'editSpeakerController'
