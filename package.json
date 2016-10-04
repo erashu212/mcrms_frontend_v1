@@ -6,6 +6,8 @@
   "scripts": {
     "install": "gulp",
     "start": "gulp",
+    "zip":"zip assets.zip assets -rv",
+    "deploy":"scp -r assets/* goweb@lab2.callperfect.net:/var/www/html/mcrms",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

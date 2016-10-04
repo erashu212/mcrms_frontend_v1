@@ -5,14 +5,17 @@
     .config(['$routeProvider',
       function ($routeProvider) {
         $routeProvider
+//page where Speaker( not admin!!!!) can login
           .when('/speaker/login', {
             templateUrl: '/templates/speaker_login.html',
             controller: 'speakerLoginController'
           })
+//page where Speaker can edit his/her profile
           .when('/speaker/editMyself',{
             templateUrl: '/templates/admin_edit_speaker.html',
             controller: 'editMyselfSpeakerController'
           })
+//page where everybody, who knows speaker'UUID, can view Speakers profile
           .when('/speaker/:speakerUUID', {
             templateUrl: '/templates/speaker_view.html',
             controller: 'speakerViewController'
@@ -23,7 +26,8 @@
         return $http
           .post('/api/v1/auth/login', {'email': $scope.email, 'password': $scope.password})
           .then(function (response) {
-            return $route.reload();
+//redirect user to page, where he/she can edit speakers profile
+            $location.path('/speaker/editMyself');
           }, function (response) {
             alert('Wrong password!');
           })
@@ -39,10 +43,8 @@
       };
 
       $http.get('/api/v1/auth/myself').then(function (response) {
-        var uuid = response.data.data.UUID;
-        // console.log(response.data.data);
-        // console.log(response.data.data.UUID);
-        $location.path('/speaker/' + uuid);
+//redirect user to page, where he/she can edit speakers profile
+        $location.path('/speaker/editMyself');
       }, function (errorResponse) {
         //it is ok, unauthorized
       });

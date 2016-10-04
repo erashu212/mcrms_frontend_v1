@@ -5,18 +5,22 @@
     .config(['$routeProvider',
       function ($routeProvider) {
         $routeProvider
+//Page where Admin, not Speaker, can login
           .when('/admin/login', {
             templateUrl: '/templates/admin_login.html',
             controller: 'adminLoginController'
           })
+//Page, where Admin, can see list of Speakers
           .when('/admin/search', {
             templateUrl: '/templates/search.html',
             controller: 'searchController'
           })
+//Page, where Admin can create new speaker
           .when('/admin/createSpeaker', {
             templateUrl: '/templates/admin_edit_speaker.html',
             controller: 'createSpeakerController'
           })
+//Page to edit speaker - Admin can visit this page from /admin/search
           .when('/admin/editSpeaker/:speakerUUID', {
             templateUrl: '/templates/admin_edit_speaker.html',
             controller: 'editSpeakerController'
@@ -90,7 +94,22 @@
       $scope.save = function () {
         return $http.post('/api/v1/speaker/', $scope.speaker)
           .then(function (ok) {
-            alert('Data saved!');
+            $location.path('/admin/search');
+          });
+      };
+      $scope.addLecture = function () {
+        $scope.speaker.lectures.push({});
+      };
+
+      $scope.removeLecture = function (i) {
+        console.log('Removing lecture ', i);
+        $scope.speaker.lectures.splice(i, 1);
+      };
+
+      $scope.save = function () {
+        return $http.post('/api/v1/speaker/', $scope.speaker)
+          .then(function (ok) {
+            $location.path('/admin/search');
           });
       };
     }])
