@@ -81,10 +81,17 @@
       });
     }])
     .controller('createSpeakerController', ['$scope', '$http', '$location', '$route', function ($scope, $http, $location, $route) {
+      $scope.speaker = {};
+      $scope.speaker.lectures = [];
       $http.get('/api/v1/admin/myself').then(function (response) {
         //it is ok, authorized
       }, function (errorResponse) {
         $location.path('/admin/login');
+      }).then(function () {
+        return $http.get('/api/v1/moderator')
+      }).then(function (moderatorResponse) {
+        $scope.moderators = moderatorResponse.data.data;
+        $scope.isAdmin = true;
       });
 
       $scope.addLecture = function () {
@@ -128,7 +135,13 @@
         return $http.get('/api/v1/speaker/' + speakerUUID);
       }).then(function (response) {
         $scope.speaker = response.data.data;
+      }).then(function () {
+        return $http.get('/api/v1/moderator')
+      }).then(function (moderatorResponse) {
+        $scope.moderators = moderatorResponse.data.data;
+        $scope.isAdmin = true;
       });
+
 
       $scope.addLecture = function () {
         $scope.speaker.lectures.push({});
@@ -156,9 +169,8 @@
       });
 
 
-
       $scope.update = function (moderator) {
-        return $http.put('/api/v1/moderator/'+moderator.id, {'name':moderator.name})
+        return $http.put('/api/v1/moderator/' + moderator.ID, {'name': moderator.name})
           .then(function (response) {
             $route.reload();
           }, function (error) {
@@ -166,17 +178,25 @@
           })
       };
 
+      $scope.create = function () {
+        return $http.post('/api/v1/moderator',{'name':$scope.newModeratorName})
+          .then(function () {
+            $route.reload();
+          }, function (error) {
+            alert('Error creating moderator!');
+          });
+      };
       $scope.remove = function (moderator) {
         if (!window.confirm('Are you sure?')) {
           return
         }
 
-        return $http.delete('/api/v1/moderator/'+moderator.id)
+        return $http.delete('/api/v1/moderator/' + moderator.ID)
           .then(function (response) {
             $route.reload();
           }, function (error) {
             alert('Error updating moderator!');
           })
       };
-   }])
+    }])
 })();

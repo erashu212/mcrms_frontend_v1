@@ -152,6 +152,20 @@
                         <a href="mailto:dara@breastcare.org">dara@breastcare.org</a>
                     </div>
 
+                    <div ng-if="isAdmin">
+                        <h3>Attach moderator</h3>
+                        <select ng-model="speaker.moderatorId">
+                            <option ng-repeat="moderator in moderators"
+                                    value="{{moderator.ID}}"
+                                    ng-selected="speaker.moderatorId == moderator.ID">
+                                {{moderator.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div ng-if="!isAdmin">
+                        Your moderator is {{speaker.moderator.name}}
+                    </div>
+
                     <button class="btn btn-primary margin-20" ng-click="save()">Submit</button>
             </form>
         </div>

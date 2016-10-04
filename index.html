@@ -27,7 +27,7 @@
                 <li ng-if="isUserLogged"><a href="/#/" ng-click="speakerLogout()">Logout</a></li>
                 <li><a href="/#/">|</a></li>
                 <li ng-if="!isAdmin"><a href="/#/admin/login">Admin login</a></li>
-                <li ng-if="isAdmin"><a href="/#/admin/settings/">ADMIN: {{myAdminUsername}}</a></li>
+                <li ng-if="isAdmin"><a href="/#/admin/settings/">ADMIN: {{myAdminUsername}} : SETTINGS</a></li>
                 <li ng-if="isAdmin"><a href="/#/admin/createSpeaker">Create speaker</a></li>
                 <li ng-if="isAdmin"><a href="/#/admin/search">List speakers</a></li>
                 <li ng-if="isAdmin"><a href="/#/" ng-click="adminLogout()">Admin logout</a></li>
