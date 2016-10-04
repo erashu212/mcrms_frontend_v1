@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>Admin settings</h1>
+            <p>There will be editable list of moderators</p>
+            <ul ng-repeat="moderator in moderators">
+                <li>#{{moderator.id}}
+                    <input type="text" ng-model="moderator.name">
+                    <button class="btn btn-success" ng-click="update(moderator)">Save</button>
+                    <button class="btn btn-danger" ng-click="remove(moderator)">Remove</button>
+                </li>
+            </ul>
+            <p>
+                New moderator:
+                <input type="text" ng-model="newModeratorName" placeholder="John Doe">
+                <button class="btn btn-success">Create</button>
+            </p>
+        </div>
+    </div>
+</div>

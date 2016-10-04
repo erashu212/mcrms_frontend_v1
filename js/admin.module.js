@@ -5,25 +5,30 @@
     .config(['$routeProvider',
       function ($routeProvider) {
         $routeProvider
-//Page where Admin, not Speaker, can login
+        //Page where Admin, not Speaker, can login
           .when('/admin/login', {
             templateUrl: '/templates/admin_login.html',
             controller: 'adminLoginController'
           })
-//Page, where Admin, can see list of Speakers
+          //Page, where Admin, can see list of Speakers
           .when('/admin/search', {
             templateUrl: '/templates/search.html',
             controller: 'searchController'
           })
-//Page, where Admin can create new speaker
+          //Page, where Admin can create new speaker
           .when('/admin/createSpeaker', {
             templateUrl: '/templates/admin_edit_speaker.html',
             controller: 'createSpeakerController'
           })
-//Page to edit speaker - Admin can visit this page from /admin/search
+          //Page to edit speaker - Admin can visit this page from /admin/search
           .when('/admin/editSpeaker/:speakerUUID', {
             templateUrl: '/templates/admin_edit_speaker.html',
             controller: 'editSpeakerController'
+          })
+          //Page for Admin to change some global things - list of moderators and so on
+          .when('/admin/settings', {
+            templateUrl: '/templates/admin_settings.html',
+            controller: 'adminSettingsController'
           })
       }])
     .controller('adminLoginController', ['$scope', '$http', '$location', '$route', function ($scope, $http, $location, $route) {
@@ -141,4 +146,37 @@
           });
       };
     }])
+    .controller('adminSettingsController', ['$scope', '$http', '$location', '$route', function ($scope, $http, $location, $route) {
+      $http.get('/api/v1/admin/myself').then(function (response) {
+        return $http.get('/api/v1/moderator');
+      }, function (errorResponse) {
+        $location.path('/admin/login');
+      }).then(function (okResponse) {
+        $scope.moderators = okResponse.data.data;
+      });
+
+
+
+      $scope.update = function (moderator) {
+        return $http.put('/api/v1/moderator/'+moderator.id, {'name':moderator.name})
+          .then(function (response) {
+            $route.reload();
+          }, function (error) {
+            alert('Error updating moderator!');
+          })
+      };
+
+      $scope.remove = function (moderator) {
+        if (!window.confirm('Are you sure?')) {
+          return
+        }
+
+        return $http.delete('/api/v1/moderator/'+moderator.id)
+          .then(function (response) {
+            $route.reload();
+          }, function (error) {
+            alert('Error updating moderator!');
+          })
+      };
+   }])
 })();

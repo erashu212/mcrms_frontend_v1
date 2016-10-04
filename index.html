@@ -25,10 +25,9 @@
                 <li ng-if="isUserLogged"><a href="/#/speaker/{{myUUID}}">{{myFirstName}} {{myLastName}}</a></li>
                 <li ng-if="isUserLogged"><a href="/#/speaker/editMyself">Edit my profile</a></li>
                 <li ng-if="isUserLogged"><a href="/#/" ng-click="speakerLogout()">Logout</a></li>
-
-
+                <li><a href="/#/">|</a></li>
                 <li ng-if="!isAdmin"><a href="/#/admin/login">Admin login</a></li>
-                <li ng-if="isAdmin"><a href="/#/">!ADMIN! {{myAdminUsername}}</a></li>
+                <li ng-if="isAdmin"><a href="/#/admin/settings/">ADMIN: {{myAdminUsername}}</a></li>
                 <li ng-if="isAdmin"><a href="/#/admin/createSpeaker">Create speaker</a></li>
                 <li ng-if="isAdmin"><a href="/#/admin/search">List speakers</a></li>
                 <li ng-if="isAdmin"><a href="/#/" ng-click="adminLogout()">Admin logout</a></li>
@@ -43,7 +42,7 @@
 
 <!-- inject:js -->
 <script src="/bower_components/jquery/dist/jquery.min.js"></script>
-<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js" ></script>
+<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/bower_components/angular/angular.min.js"></script>
 <script src="/bower_components/angular-route/angular-route.min.js"></script>
 <script src="/js/app.js"></script>
