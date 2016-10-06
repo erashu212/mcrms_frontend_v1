@@ -1,0 +1,489 @@
+<!--<label for="username">Username</label>
+<input type="text" id="username" #username>
+<label for="email">E-mail</label>
+<input type="text" id="email" #email>
+<button (click)="onSubmit(username.value, email.value)">Submit</button>-->
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="margin-20">
+        <h1>Speaker Admin Page</h1>
+      </div>
+
+        <form [formGroup]="myForm" autocomplete="off" novalidate>
+          
+          <div>
+            <label>Conference Years: {{conferenceyears}}</label>
+          </div>
+
+          <div class="btn-group margin-20">
+            <button type="button" class="btn btn-default">Sun</button>
+            <button type="button" class="btn btn-default">Mon</button>
+            <button type="button" class="btn btn-primary">Tue</button>
+            <button type="button" class="btn btn-primary">Wed</button>
+            <button type="button" class="btn btn-default">Thu</button>
+            <button type="button" class="btn btn-default">Fri</button>
+            <button type="button" class="btn btn-default">Sat</button>
+          </div>
+
+          <div class="form-group">
+            <label class="margin-20" for="sessionordernumber">Session Order / Number</label>
+            <input class="form-control" type="text" id="sessionordernumber" placeholder="Session Order / Number" maxlength="50" formControlName="sessionordernumber">
+          </div>
+
+          <div class="form-group">
+            <label for="timeslot">Time Slot</label>
+            <input class="form-control" type="text" id="timeslot" placeholder="Time Slot" maxlength="50" formControlName="timeslot">
+          </div>
+
+          <label>Session or Event</label>
+          <div *ngFor="let soe of sessionorevents">
+              <label>
+              <input type="radio" name="sessionorevents" formControlName="sessionorevents" 
+                [value]="soe.value">
+                {{soe.display}}
+              </label>
+          </div>
+
+          <div class="form-group">
+            <label class="margin-20" for="committeemembername">Committee Member Name</label>
+            <input class="form-control" type="text" id="committeemembername" placeholder="Committee Member Name" maxlength="50" formControlName="committeemembername">
+          </div>
+
+          <div class="form-group">
+            <label for="lengthofspeach">Length of speach</label>
+            <input class="form-control" type="number" id="lengthofspeach" placeholder="Length of speach" maxlength="50" formControlName="lengthofspeach">
+          </div>
+
+          <div class="form-group">
+            <label for="additionalspeakers">Speakers</label>
+            <textarea class="form-control custom-control" rows="3" style="resize:none" placeholder="Speakers" maxlength="100" formControlName="additionalspeakers"></textarea>
+          </div>
+
+          <label class="form-check-inline">
+              <input type="checkbox" formControlName="postconference">POST-Conference
+          </label>
+          <label class="form-check-inline">
+              <input type="checkbox" formControlName="individualpresentation">Individual Presentation
+          </label>
+          <label class="form-check-inline">
+              <input type="checkbox" formControlName="leadpaneldiscussion">Lead Panel Discussion
+          </label>
+          <label class="form-check-inline">
+              <input type="checkbox" formControlName="paneldiscussionmoderator">Panel Discussion Moderator
+          </label>
+
+          <div class="form-group">
+            <label for="firstname">First Name</label>
+            <input class="form-control" type="text" id="firstname" placeholder="First Name" maxlength="50" formControlName="firstname">
+            <div class="field-error-message" *ngIf="myForm.controls.firstname.dirty && myForm.controls.firstname.errors?.required">
+            <!--<div class="field-error-message" *ngIf="firstname?.errors?.required">-->
+              field is mandatory
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="lastname">Last Name</label>
+            <input class="form-control" type="text" id="lastname" placeholder="Last Name" maxlength="50" formControlName="lastname">
+          </div>
+
+          <div class="form-group">
+            <label for="lengthofspeach">Email Address</label>
+            <input class="form-control" type="text" id="email" placeholder="Email Address" maxlength="50" formControlName="email">
+          </div>
+
+          <div class="form-group">
+            <label for="lengthofspeach">Phone Number</label>
+            <input class="form-control" type="number" id="phone" placeholder="Phone Number" maxlength="20" formControlName="phone">
+          </div>
+
+          <div class="form-group">
+            <label for="credentials">Credentials</label>
+            <input class="form-control" type="text" id="credentials" placeholder="Credentials" maxlength="10" formControlName="credentials">
+          </div>
+
+
+          <fieldset formGroupName="address">
+            <label for="street">Street Address1</label>
+            <input class="form-control" type="text" id="street1" placeholder="e.g. 123 Elm St." maxlength="100" formControlName="street1">
+            <label for="street">Street Address2</label>
+            <input class="form-control" type="text" id="street2" placeholder="e.g. Suite 102" maxlength="100" formControlName="street2">
+
+            <label for="City">City</label>
+            <input class="form-control" type="text" id="city" placeholder="City" maxlength="50" formControlName="city">
+
+            <div class="margin-20">
+                <label>State</label>
+                <div class="dropdown">
+                    <select class="btn btn-default-xm dropdown-toggle" data-toggle="dropdown" name="state" formControlName="state">
+                        <option *ngFor="let state of states" [value]="state.value">  
+                        {{state.display}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <label for="zip">Zip Code</label>
+            <input class="form-control" type="text" id="zipcode" placeholder="Zip Code" maxlength="10" formControlName="zipcode">
+          </fieldset>
+
+
+          <div class="form-group margin-20">
+            <label for="firstname2">Secondary Contact's First Name</label>
+            <input class="form-control" type="text" id="firstname2" placeholder="Secondary Contact's First Name" maxlength="50" formControlName="firstname2">
+          </div>
+
+          <div class="form-group">
+            <label for="lastname2">Secondary Contact's Last Name</label>
+            <input class="form-control" type="text" id="lastname2" placeholder="Secondary Contact's Last Name" maxlength="50" formControlName="lastname2">
+          </div>
+
+          <div class="form-group">
+            <label for="lengthofspeach">Secondary Contact's Email Address</label>
+            <input class="form-control" type="text" id="email2" placeholder="Secondary Contact's Email Address" maxlength="50" formControlName="email2">
+          </div>
+
+
+
+          <div class="form-group margin-20">
+            <label>Confirmation Status</label>
+            <div *ngFor="let status of confirmationstatus">
+                <label>
+                <input type="radio" name="confirmationstatus" formControlName="confirmationstatus" 
+                  [value]="status.value">
+                  {{status.display}}
+                </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Speaking Role</label>
+            <div *ngFor="let role of speakingrole">
+                <label>
+                <input type="radio" name="speakingrole" formControlName="speakingrole" 
+                  [value]="role.value">
+                  {{role.display}}
+                </label>
+            </div>
+          </div>
+
+          <div>
+              <label>Moderator</label>
+              <select name="moderator" formControlName="moderator">
+                  <option *ngFor="let mod of moderator" [value]="mod.value">  
+                  {{mod.display}}
+                  </option>
+              </select>
+          </div>
+
+          <div>
+              <label>Title Status</label>
+              <select name="titlestatus" formControlName="titlestatus">
+                  <option *ngFor="let status of receiptstatus" [value]="status.value">  
+                  {{status.display}}
+                  </option>
+              </select>
+          </div>
+
+          <div>
+              <label>Desc</label>
+              <select name="descstatus" formControlName="descstatus">
+                  <option *ngFor="let status of receiptstatus" [value]="status.value">  
+                  {{status.display}}
+                  </option>
+              </select>
+          </div>
+
+          <div>
+              <label>Obj Status</label>
+              <select name="objstatus" formControlName="objstatus">
+                  <option *ngFor="let status of receiptstatus" [value]="status.value">  
+                  {{status.display}}
+                  </option>
+              </select>
+          </div>
+
+          <div>
+              <label>Outline</label>
+              <select name="outlinestatus" formControlName="outlinestatus">
+                  <option *ngFor="let status of receiptstatus" [value]="status.value">  
+                  {{status.display}}
+                  </option>
+              </select>
+          </div>
+
+          <div>
+              <label>Attest</label>
+              <select name="atteststatus" formControlName="atteststatus">
+                  <option *ngFor="let status of receiptstatus" [value]="status.value">  
+                  {{status.display}}
+                  </option>
+              </select>
+          </div>
+
+          <div>
+              <label>Disclosure</label>
+              <select name="disclosurestatus" formControlName="disclosurestatus">
+                  <option *ngFor="let status of receiptstatus" [value]="status.value">  
+                  {{status.display}}
+                  </option>
+              </select>
+          </div>
+
+          <div>
+              <label>CVS Status</label>
+              <select name="cvsstatus" formControlName="cvsstatus">
+                  <option *ngFor="let status of receiptstatus" [value]="status.value">  
+                  {{status.display}}
+                  </option>
+              </select>
+          </div>
+
+          <div>
+              <label>Bio Status</label>
+              <select name="biostatus" formControlName="biostatus">
+                  <option *ngFor="let status of receiptstatus" [value]="status.value">  
+                  {{status.display}}
+                  </option>
+              </select>
+          </div>
+
+          <div>
+              <label>Photo</label>
+              <select name="photostatus" formControlName="photostatus">
+                  <option *ngFor="let status of receiptstatus" [value]="status.value">  
+                  {{status.display}}
+                  </option>
+              </select>
+          </div>
+
+          <div>
+              <label>Cont Data</label>
+              <select name="contdatastatus" formControlName="contdatastatus">
+                  <option *ngFor="let status of receiptstatus" [value]="status.value">  
+                  {{status.display}}
+                  </option>
+              </select>
+          </div>
+
+          <div>
+              <label>Sec Contact</label>
+              <select name="seccontactstatus" formControlName="seccontactstatus">
+                  <option *ngFor="let status of receiptstatus" [value]="status.value">  
+                  {{status.display}}
+                  </option>
+              </select>
+          </div>
+
+          <div>
+              <label>Spkr Listing</label>
+              <select name="spkrlistingstatus" formControlName="spkrlistingstatus">
+                  <option *ngFor="let status of receiptstatus" [value]="status.value">  
+                  {{status.display}}
+                  </option>
+              </select>
+          </div>
+
+          <div>
+              <label>Hotel Status</label>
+              <select name="hotelstatus" formControlName="hotelstatus">
+                  <option *ngFor="let status of receiptstatus" [value]="status.value">  
+                  {{status.display}}
+                  </option>
+              </select>
+          </div>
+
+          <div>
+              <label>AV Status</label>
+              <select name="avstatus" formControlName="avstatus">
+                  <option *ngFor="let status of receiptstatus" [value]="status.value">  
+                  {{status.display}}
+                  </option>
+              </select>
+          </div>
+
+          <div>
+              <label>PPT Status</label>
+              <select name="pptstatus" formControlName="pptstatus">
+                  <option *ngFor="let status of receiptstatus" [value]="status.value">  
+                  {{status.display}}
+                  </option>
+              </select>
+          </div>
+
+        <div class="form-group margin-20">
+            <label>
+                <input type="checkbox" name="vip" formControlName="vip">
+                VIP
+            </label>
+        </div>
+
+        <div>
+            <label for="sessionordernumber">Hotel</label>
+            <input class="form-control" type="text" id="hotel" placeholder="Hotel" maxlength="50" formControlName="hotel">
+        </div>
+ 
+        <div class="form-group">
+            <label class="margin-20" for="sessionordernumber">Number of nights</label>
+            <input class="form-control" type="number" id="numberofnights" placeholder="Number of nights" maxlength="50" formControlName="numberofnights">
+        </div>
+
+        <div class="form-group">
+            <label for="additionalspeakers">Special Instructions</label>
+            <textarea class="form-control custom-control" rows="3" style="resize:none" placeholder="Speacial Instructions" formControlName="specialinstructions"></textarea>
+        </div>
+
+
+
+
+          <br>
+
+<!--lectures-->
+        <div formArrayName="lectures">
+          <div *ngFor="let lectures of lectures.controls; let i=index" class="panel panel-default">
+            <div class="panel-heading">
+              <span>Lecture {{i + 1}}</span>
+              <!--<span class="glyphicon glyphicon-remove pull-right" *ngIf="lectures.controls.length > 1" (click)="removeLecture(i)"></span>-->
+              <span class="glyphicon glyphicon-remove pull-right" (click)="removeLecture(i)"></span>
+            </div>
+            <div class="panel-body" [formGroupName]="i">
+              <!--<lecture [group]="myForm.controls.lectures.controls[i]"></lecture>-->
+
+              <div>
+                  <label>Segment</label>
+                  <select name="segment" formControlName="segment">
+                      <option *ngFor="let seg of segment" [value]="seg.value">  
+                      {{seg.display}}
+                      </option>
+                  </select>
+              </div>
+
+              <div><strong>INFO GROUP 1 </strong>DUE DATE {{infoGroup1DueDate}}</div>
+                <input class="form-control" type="text" id="title" placeholder="Title" maxlength="100" formControlName="title">
+                <input class="form-control" type="text" id="description" placeholder="Description" formControlName="description">
+              <div><strong>INFO GROUP 2 </strong>DUE DATE {{infoGroup2DueDate}}</div>
+                <input class="form-control" type="text" id="objective" placeholder="Objective" formControlName="objective">
+                <!--<input class="form-control" type="text" id="outline" placeholder="Outline" formControlName="outline">-->
+                <textarea class="form-control custom-control" rows="3" style="resize:none" placeholder="Outline" formControlName="outline"></textarea>
+              <!--<button class="btn btn-default" (click)="removeLecture(i)">Remove</button>-->
+            </div>
+
+            <!--<div *ngFor="let address of addresses.controls; let i=index" [formGroupName]="i">
+                <p>Address</p>
+                <md-input placeholder="Street" formControlName="street" required></mid-input>
+                <div class="flex align-center">
+                    <select formControlName="state" class="flex-one">
+                        <option value="" disabled>Select a state</option>
+                        <option value="CA">CA</option>
+                        <option value="NY">NY</option>
+                    </select>
+                    <md-input placeholder="zip" type="number" formControlName="zip" class="flex-one"></md-input>
+                </div>
+            </div>-->
+            
+          </div>
+        </div>
+
+        <div class="margin-20">
+          <a (click)="addLecture()" style="cursor: default">
+            Add another lecture +
+          </a>
+        </div>
+<!--end lectures-->
+
+
+
+        <div>
+          ADDITIONAL INFORMATION REQUIRED:<br>
+          <div class="tabbedIn">Complete CV - Accomplishments - Resume</div>
+          <div class="tabbedIn">Short Bio-Sketch</div>
+          <div class="tabbedIn">Head / Shoulders Photo</div>
+          <div class="tabbedIn">50 word or less introduction if you are a speaker</div>
+        </div>
+
+        <div class="margin-20"><strong>INFO GROUP 3 </strong>DUE DATE {{infoGroup3DueDate}}</div>              
+        <div class="tabbedIn">Powerpoint Upload</div>
+        <div class="tabbedIn">Audio/Visual items needed (check all that apply):</div>
+
+          <div class="tabbedInx2">
+            <label class="form-check-inline">
+                <input type="checkbox" formControlName="laserpointerneeded">Laser pointer
+            </label>
+            <label class="form-check-inline">
+                <input type="checkbox" formControlName="computerneeded">Computer
+            </label>
+            <label class="form-check-inline">
+                <input type="checkbox" formControlName="appleneeded">Apple
+            </label>
+            <label class="form-check-inline">
+                <input type="checkbox" formControlName="pcneeded">PC
+            </label>
+            <span> Or </span>
+            <label class="form-check-inline">
+                <input type="checkbox" formControlName="uoc">Use own computer
+            </label>
+            <label class="form-check-inline">
+                <input type="checkbox" formControlName="uocapple">Apple
+            </label>
+            <label class="form-check-inline">
+                <input type="checkbox" formControlName="uocpc">PC
+            </label>
+          </div>
+
+        <div class="tabbedIn">Note: For Questions, Please Contact Dara Long, Special Projects Coordinator at dara@breastcare.org</div>
+
+        <button class="btn btn-info margin-20" [disabled]="!myForm.controls.email.valid" (click)="emailLandingLink(myForm.value)">Email Landing Link</button>
+        <button class="btn btn-primary margin-20" [disabled]="!myForm.valid" (click)="save()">Submit</button>
+
+
+
+
+
+<!--Diagnostic Info-->
+        <div class="clearfix"></div>
+        <div style="margin-top: 50px">
+          <hr>
+          <p>Karl's diagnostic information:</p>
+          <div>
+            <button (click)="partialLoad()">Partial Load</button>
+            <button (click)="save()">Save</button>
+            <button (click)="reset()">Cancel</button>
+          </div>
+
+          <div class="margin-20">
+            <!--<div>{{ myForm.controls.firstname?.errors | json }}</div>
+            <div>{{ myForm.controls.firstname?.errors?.required | json }}</div>-->
+
+            <div>
+              <pre>lectures.controls.length: <br>{{lectures.controls.length | json}}</pre>
+            </div>
+            <div>
+              <pre>myForm.controls.firstname.value: <br>{{myForm.controls.firstname.value | json}}</pre>
+            </div>
+            <div>
+              <pre>myForm.status: <br>{{myForm.status | json}}</pre>
+            </div>
+            <div>
+              <pre>myForm.value: <br>{{myForm.value | json}}</pre>
+            </div>
+            <div>
+              <pre>myForm.valid: <br>{{myForm.valid | json}}</pre>
+            </div>
+            <div>
+              <pre>people: <br>{{people | json}}</pre>
+            </div>
+            <div>
+              <pre>speakers: <br>{{speakers | json }}</pre>
+            </div>
+          </div>
+        </div>
+<!--end Diagnostic section-->
+
+      </form>
+
+    </div>
+  </div>
+</div>
