@@ -60,8 +60,8 @@
       });
     }])
     .controller('editMyselfSpeakerController', ['$scope', '$http', '$location', '$route', function ($scope, $http, $location, $route) {
+      $scope.conferenceyears = new Date().getFullYear();
       var speakerUUID;
-
       $http.get('/api/v1/auth/myself').then(function (response) {
         speakerUUID = response.data.data.UUID;
         $scope.speaker = response.data.data;

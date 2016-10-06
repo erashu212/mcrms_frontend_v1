@@ -81,6 +81,8 @@
       });
     }])
     .controller('createSpeakerController', ['$scope', '$http', '$location', '$route', function ($scope, $http, $location, $route) {
+      $scope.isCreatingSpeaker = true;
+      $scope.conferenceyears = new Date().getFullYear();
       $scope.speaker = {};
       $scope.speaker.lectures = [];
       $http.get('/api/v1/admin/myself').then(function (response) {
@@ -126,6 +128,7 @@
       };
     }])
     .controller('editSpeakerController', ['$scope', '$http', '$location', '$route', '$routeParams', function ($scope, $http, $location, $route, $routeParams) {
+      $scope.conferenceyears = new Date().getFullYear();
       var speakerUUID = $routeParams.speakerUUID;
       $http.get('/api/v1/admin/myself').then(function (response) {
         //it is ok, authorized
@@ -179,7 +182,7 @@
       };
 
       $scope.create = function () {
-        return $http.post('/api/v1/moderator',{'name':$scope.newModeratorName})
+        return $http.post('/api/v1/moderator', {'name': $scope.newModeratorName})
           .then(function () {
             $route.reload();
           }, function (error) {

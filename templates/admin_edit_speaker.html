@@ -5,7 +5,61 @@
                 <h1>Speaker Landing Page</h1>
             </div>
 
-            <form [formGroup]="myForm" autocomplete="off" novalidate>
+            <form autocomplete="off" novalidate>
+
+                <div>
+                    <label>Conference Years: {{conferenceyears}}</label>
+                </div>
+
+                <div class="btn-group margin-20">
+                    <button type="button" class="btn btn-default">Sun</button>
+                    <button type="button" class="btn btn-default">Mon</button>
+                    <button type="button" class="btn btn-primary">Tue</button>
+                    <button type="button" class="btn btn-primary">Wed</button>
+                    <button type="button" class="btn btn-default">Thu</button>
+                    <button type="button" class="btn btn-default">Fri</button>
+                    <button type="button" class="btn btn-default">Sat</button>
+                </div>
+
+                <div class="form-group">
+                    <label class="margin-20" for="sessionordernumber">Session Order / Number</label>
+                    <input class="form-control"
+                           type="text" id="sessionordernumber"
+                           placeholder="Session Order / Number" maxlength="50"
+                           ng-model="speaker.sessionordernumber"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="timeslot">Time Slot</label>
+                    <input class="form-control" type="text"
+                           id="timeslot" placeholder="Time Slot" maxlength="50"
+                           ng-model="speaker.timeslot"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="sessionorevents">Session or Event</label>
+                    <input class="form-control" type="text" id="sessionorevents"
+                           name="sessionorevents" ng-model="speaker.sessionorevents"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="margin-20" for="committeemembername">Committee Member Name</label>
+                    <input class="form-control" type="text" id="committeemembername"
+                           placeholder="Committee Member Name" maxlength="50"
+                           ng-model="speaker.committeemembername"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="lengthofspeach">Length of speach</label>
+                    <input class="form-control" type="number" id="lengthofspeach" placeholder="Length of speach" maxlength="50" formControlName="lengthofspeach">
+                </div>
+
+                <div class="form-group">
+                    <label for="additionalspeakers">Speakers</label>
+                    <textarea class="form-control custom-control" rows="3" style="resize:none"
+                              id="additionalspeakers"
+                              placeholder="Speakers" maxlength="100">{{speaker.additionalspeakers}}</textarea>
+                </div>
 
                 <div>
                     <!--<div>DUE DATE <span style="color:blue">00/00/00</span></div>-->
@@ -165,8 +219,12 @@
                     <div ng-if="!isAdmin">
                         Your moderator is {{speaker.moderator.name}}
                     </div>
-
-                    <button class="btn btn-primary margin-20" ng-click="save()">Submit</button>
+                    <div ng-if="isCreatingSpeaker">
+                        <h3>Email Landing Link will be done automatically!</h3>
+                    </div>
+                    <div class="form-control">
+                        <button class="btn btn-primary margin-20" ng-click="save()">Submit</button>
+                    </div>
             </form>
         </div>
     </div>
