@@ -55,8 +55,15 @@
         $scope.speakerFound = true;
         $scope.speaker = response.data.data;
         $scope.speakerJSON = JSON.stringify(response.data.data, null, 2);
+//load speaker documents
+        return $http.get('/api/v1/document/?speakerUUID='+speakerUUID);
       }, function (errorResponse) {
         $scope.speakerFound = false;
+        return;
+      }).then(function (documentsResponse) {
+        if(documentsResponse){
+          $scope.documents = documentsResponse.data.data;
+        }
       });
     }])
     .controller('editMyselfSpeakerController', ['$scope', '$http', '$location', '$route', function ($scope, $http, $location, $route) {
