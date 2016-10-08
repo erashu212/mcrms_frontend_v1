@@ -53,6 +53,11 @@
       });
     }])
     .controller('searchController', ['$scope', '$http', '$location', function ($scope, $http, $location) {
+
+      $scope.createNewSpeaker = function(){
+        $location.path('/admin/createSpeaker');
+      }
+
       $http.get('/api/v1/admin/myself').then(function (response) {
         //it is ok, authorized
       }, function (errorResponse) {
