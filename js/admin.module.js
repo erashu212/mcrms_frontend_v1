@@ -30,6 +30,10 @@
             templateUrl: '/templates/admin_settings.html',
             controller: 'adminSettingsController'
           })
+          .when('/admin/report', {
+            templateUrl: '/templates/report.html',
+            controller: 'reportController'
+          })
       }])
     .controller('adminLoginController', ['$scope', '$http', '$location', '$route', function ($scope, $http, $location, $route) {
       $scope.doLogin = function () {

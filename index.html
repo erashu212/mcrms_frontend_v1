@@ -42,9 +42,9 @@
                     <li ng-if="isUserLogged"><a href="/#/speaker/editMyself">Edit my profile</a></li>
                     <li ng-if="isUserLogged"><a href="/#/" ng-click="speakerLogout()">Logout</a></li>
                 </ul>
-
                 <ul class="nav navbar-nav navbar-right">
                     <li ng-if="isAdmin"><a href="/#/admin/settings/">ADMIN: {{myAdminUsername}} : SETTINGS</a></li>
+                    <li ng-if="isAdmin"><a href="/#/admin/report/">Report</a></li>
                     <li ng-if="isAdmin"><a href="/#/admin/createSpeaker">Create speaker</a></li>
                     <li ng-if="isAdmin"><a href="/#/admin/search">List speakers</a></li>
                     <li ng-if="!isAdmin"><a href="/#/admin/login">Admin login</a></li>
@@ -57,7 +57,6 @@
     </nav>
 </header>
 <!--start content -->
-
 <div ng-view></div>
 
 <!--end content -->
