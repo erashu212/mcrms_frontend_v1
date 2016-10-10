@@ -12,27 +12,27 @@
         </div>
 
         <div class="btn-group margin-20">
-          <input type="checkbox"
+          <button ng-click="speaker.sunday = !speaker.sunday"
                  ng-model="speaker.sunday"
-                 ng-class="speaker.sunday ? 'btn btn-primary' : 'btn btn-default' ">Sun</input>
-          <input type="checkbox"
+                 ng-class="speaker.sunday ? 'btn btn-primary' : 'btn btn-default' ">Sun</button>
+          <button ng-click="speaker.monday = !speaker.monday"
                  ng-model="speaker.monday"
-                 ng-class="speaker.monday ? 'btn btn-primary' : 'btn btn-default' ">Mon</input>
-          <input type="checkbox"
+                 ng-class="speaker.monday ? 'btn btn-primary' : 'btn btn-default' ">Mon</button>
+          <button ng-click="speaker.tuesday = !speaker.tuesday"
                  ng-model="speaker.tuesday"
-                 ng-class="speaker.tuesday ? 'btn btn-primary' : 'btn btn-default' ">Tue</input>
-          <input type="checkbox"
+                 ng-class="speaker.tuesday ? 'btn btn-primary' : 'btn btn-default' ">Tue</button>
+          <button ng-click="speaker.wednesday = !speaker.wednesday"
                  ng-model="speaker.wednesday"
-                 ng-class="speaker.wednesday ? 'btn btn-primary' : 'btn btn-default' ">Wed</input>
-          <input type="checkbox"
+                 ng-class="speaker.wednesday ? 'btn btn-primary' : 'btn btn-default' ">Wed</button>
+          <button ng-click="speaker.thursday = !speaker.thursday"
                  ng-model="speaker.thursday"
-                 ng-class="speaker.thursday ? 'btn btn-primary' : 'btn btn-default' ">Thu</input>
-          <input type="checkbox"
+                 ng-class="speaker.thursday ? 'btn btn-primary' : 'btn btn-default' ">Thu</button>
+          <button ng-click="speaker.friday = !speaker.friday"
                  ng-model="speaker.friday"
-                 ng-class="speaker.friday ? 'btn btn-primary' : 'btn btn-default' ">Fri</input>
-          <input type="checkbox"
+                 ng-class="speaker.friday ? 'btn btn-primary' : 'btn btn-default' ">Fri</button>
+          <button ng-click="speaker.saturday = !speaker.saturday"
                  ng-model="speaker.saturday"
-                 ng-class="speaker.saturday ? 'btn btn-primary' : 'btn btn-default' ">Sat</input>
+                 ng-class="speaker.saturday ? 'btn btn-primary' : 'btn btn-default' ">Sat</button>
         </div>
 
         <div class="form-group">
